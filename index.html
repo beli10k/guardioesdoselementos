@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elementally: Os Guardiões dos Ciclos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- TELA DE SELEÇÃO DE GUARDIÃO -->
+        <div id="guardianSelectionScreen" class="screen active">
+            <header class="selection-header">
+                <h1>⚗️ Elementally</h1>
+                <p class="subtitle">Os Guardiões dos Ciclos</p>
+                <p class="intro-text">Escolha seu Guardião e comece sua jornada para restaurar o equilíbrio de Elementia!</p>
+            </header>
+
+            <div class="guardians-grid">
+                <!-- Guardião da Água -->
+                <div class="guardian-card" data-guardian="water">
+                    <div class="guardian-icon">💧</div>
+                    <h3>Guardião da Água</h3>
+                    <p class="guardian-subtitle">Especialista em Ciclos Hidrológicos</p>
+                    <div class="guardian-description">
+                        <p>Domina a transformação da água entre estados físicos. Especialista em evaporação, condensação e purificação.</p>
+                    </div>
+                    <div class="guardian-bonus">
+                        <strong>Bônus Especial:</strong>
+                        <ul>
+                            <li>+20% eficiência em transformações de água</li>
+                            <li>+15 pontos em purificação</li>
+                            <li>Começa com água em 40%</li>
+                        </ul>
+                    </div>
+                    <button class="btn-select">Selecionar</button>
+                </div>
+
+                <!-- Guardião do Oxigênio -->
+                <div class="guardian-card" data-guardian="oxygen">
+                    <div class="guardian-icon">🌿</div>
+                    <h3>Guardião do Oxigênio</h3>
+                    <p class="guardian-subtitle">Especialista em Fotossíntese</p>
+                    <div class="guardian-description">
+                        <p>Controla a produção de oxigênio através da fotossíntese. Especialista em equilibrar plantas e criaturas.</p>
+                    </div>
+                    <div class="guardian-bonus">
+                        <strong>Bônus Especial:</strong>
+                        <ul>
+                            <li>+25% produção de oxigênio</li>
+                            <li>Plantas começam em 10</li>
+                            <li>+20 pontos em fotossíntese</li>
+                        </ul>
+                    </div>
+                    <button class="btn-select">Selecionar</button>
+                </div>
+
+                <!-- Guardião da Transformação -->
+                <div class="guardian-card" data-guardian="transformation">
+                    <div class="guardian-icon">⚗️</div>
+                    <h3>Guardião da Transformação</h3>
+                    <p class="guardian-subtitle">Especialista em Reações Químicas</p>
+                    <div class="guardian-description">
+                        <p>Domina as reações químicas fundamentais. Especialista em fotossíntese, respiração e decomposição.</p>
+                    </div>
+                    <div class="guardian-bonus">
+                        <strong>Bônus Especial:</strong>
+                        <ul>
+                            <li>+30% eficiência em reações químicas</li>
+                            <li>+25 pontos por reação</li>
+                            <li>Todas as reações desbloqueadas</li>
+                        </ul>
+                    </div>
+                    <button class="btn-select">Selecionar</button>
+                </div>
+
+                <!-- Guardião do Equilíbrio -->
+                <div class="guardian-card" data-guardian="balance">
+                    <div class="guardian-icon">⚖️</div>
+                    <h3>Guardião do Equilíbrio</h3>
+                    <p class="guardian-subtitle">Especialista em Homeostase</p>
+                    <div class="guardian-description">
+                        <p>Mantém todos os ciclos em harmonia perfeita. Especialista em equilíbrio ambiental e sustentabilidade.</p>
+                    </div>
+                    <div class="guardian-bonus">
+                        <strong>Bônus Especial:</strong>
+                        <ul>
+                            <li>+15% equilíbrio ambiental</li>
+                            <li>Começa com 50% de equilíbrio</li>
+                            <li>+30 pontos por fase completada</li>
+                        </ul>
+                    </div>
+                    <button class="btn-select">Selecionar</button>
+                </div>
+            </div>
+
+            <div class="selection-footer">
+                <p>💡 Dica: Cada guardião tem bônus especiais. Escolha aquele que mais se adequa ao seu estilo de jogo!</p>
+            </div>
+        </div>
+
+        <!-- TELA PRINCIPAL DO JOGO -->
+        <div id="gameScreen" class="screen">
+            <!-- Header -->
+            <header>
+                <h1>⚗️ Elementally: Os Guardiões dos Ciclos</h1>
+                <p class="subtitle">Restaure o equilíbrio de Elementia</p>
+            </header>
+
+            <!-- Botão Voltar -->
+            <div class="back-button-container">
+                <button id="backToSelection" class="btn-back">← Voltar à Seleção</button>
+            </div>
+
+            <!-- Tabs de Navegação -->
+            <div class="tabs">
+                <button class="tab-button active" data-tab="game">🎮 Jogar</button>
+                <button class="tab-button" data-tab="rules">📖 Regras</button>
+            </div>
+
+            <!-- ABA: JOGAR -->
+            <div id="game" class="tab-content active">
+                <div class="game-layout">
+                    <!-- Coluna Esquerda: Status do Jogador -->
+                    <div class="left-column">
+                        <div class="card player-info">
+                            <div class="card-header">👤 Seu Guardião</div>
+                            <div id="guardianDisplay" class="guardian-display">
+                                <div class="guardian-display-icon">💧</div>
+                                <div class="guardian-display-info">
+                                    <p id="guardianName" class="guardian-name">Guardião da Água</p>
+                                    <p id="guardianType" class="guardian-type">Especialista em Ciclos Hidrológicos</p>
+                                </div>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">Nível:</span>
+                                <span class="stat-value" id="playerLevel">1</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">Pontos:</span>
+                                <span class="stat-value" id="playerScore">0</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">Fase:</span>
+                                <span class="stat-value" id="playerPhase">1</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">Bioma:</span>
+                                <span class="stat-value" id="playerBiome">Deserto</span>
+                            </div>
+
+                        </div>
+
+                        <!-- Equilíbrio Ambiental -->
+                        <div class="card">
+                            <div class="card-header">⚖️ Equilíbrio Ambiental</div>
+                            <div class="status-box">
+                                <p id="balanceStatus">Saúde Geral 35%</p>
+                            </div>
+                            <div class="progress-container">
+                                <div class="progress-label">
+                                    <span>Equilíbrio</span>
+                                    <span id="balancePercent">35%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="balanceFill" style="width: 35%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Coluna Central: Fase e Descrição -->
+                    <div class="center-column">
+                        <div class="card phase-card">
+                            <div class="card-header" id="phaseTitle">Fase 1 - Equilíbrio: 35%</div>
+                            <div class="phase-description" id="phaseDescription">
+                                🏜️ Você está no Deserto. Restaure o fluxo de água!
+                            </div>
+                            <div style="display: flex; gap: 10px; margin-top: 15px;">
+                                <button id="advancePhaseBtn" class="btn-primary" style="display: none; flex: 1;">
+                                    ⬆️ Avançar
+                                </button>
+                                <button id="skipPhaseBtn" class="btn-secondary" style="flex: 1; background: #f97316; color: white;" title="Pula para a próxima fase sem completar objetivos">
+                                    ⏩ Pular
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Ciclo da Água -->
+                        <div class="card">
+                            <div class="card-header">💧 Ciclo da Água</div>
+                            <div class="progress-container">
+                                <div class="progress-label">
+                                    <span>Nível de Água</span>
+                                    <span id="waterLevelPercent">30%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="waterLevelFill" style="width: 30%"></div>
+                                </div>
+                            </div>
+                            <div class="progress-container">
+                                <div class="progress-label">
+                                    <span>Pureza da Água</span>
+                                    <span id="waterPurityPercent">40%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="waterPurityFill" style="width: 40%"></div>
+                                </div>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">Estado:</span>
+                                <span class="stat-value" id="waterState">💧 Líquido</span>
+                            </div>
+                            <div class="mini-tabs">
+                                <button class="mini-tab active" data-water-state="liquid">💧 Líquido</button>
+                                <button class="mini-tab" data-water-state="solid">❄️ Sólido</button>
+                                <button class="mini-tab" data-water-state="gas">☁️ Gasoso</button>
+                            </div>
+                            <div class="btn-group">
+                                <button class="btn-secondary" id="purifyWaterBtn" title="Purifica a água e aumenta sua pureza">🔬 Purificar</button>
+                            </div>
+                        </div>
+
+                        <!-- Ciclo do Oxigênio -->
+                        <div class="card">
+                            <div class="card-header">🌿 Ciclo do Oxigênio</div>
+                            <div class="progress-container">
+                                <div class="progress-label">
+                                    <span>Oxigênio (O₂)</span>
+                                    <span id="oxygenLevelPercent">40%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="oxygenLevelFill" style="width: 40%"></div>
+                                </div>
+                            </div>
+                            <div class="progress-container">
+                                <div class="progress-label">
+                                    <span>Dióxido de Carbono (CO₂)</span>
+                                    <span id="co2LevelPercent">60%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill danger" id="co2LevelFill" style="width: 60%"></div>
+                                </div>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">🌱 Plantas:</span>
+                                <span class="stat-value" id="plantCount">5</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">🦋 Criaturas:</span>
+                                <span class="stat-value" id="creatureCount">8</span>
+                            </div>
+                            <div class="btn-group">
+                                <button class="btn-secondary" id="plantTreeBtn" title="Planta uma árvore que produz oxigênio">🌱 Plantar</button>
+                                <button class="btn-secondary" id="addCreatureBtn" title="Adiciona uma criatura que consome oxigênio">➕ Criatura</button>
+                                <button class="btn-secondary" id="removeCreatureBtn" title="Remove uma criatura">➖ Remover</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Coluna Direita: Habilidades -->
+                    <div class="right-column">
+                        <div class="card">
+                            <div class="card-header">🎯 Habilidades Desbloqueadas</div>
+                            <div id="abilitiesList" class="abilities-list">
+                                <div class="ability-item">
+                                    <div class="ability-icon">💧</div>
+                                    <div class="ability-info">
+                                        <p class="ability-name">Transformação de Água</p>
+                                        <p class="ability-desc">Mude o estado da água</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Reações Químicas -->
+                        <div class="card">
+                            <div class="card-header">⚗️ Reações Químicas</div>
+                            <div class="btn-group">
+                                <button class="btn-primary" id="photosynthesisBtn" title="6CO₂ + 6H₂O + Luz → C₆H₁₂O₆ + 6O₂">🌿 Fotossíntese</button>
+                                <button class="btn-primary" id="respirationBtn" title="C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O">💨 Respiração</button>
+                                <button class="btn-primary" id="decompositionBtn" title="Decomposição de matéria orgânica">🍂 Decomposição</button>
+                                <button class="btn-primary" id="neutralizeBtn" title="Neutraliza a acidez da água">🔬 Neutralizar</button>
+                            </div>
+                        </div>
+
+                        <!-- Dicas -->
+                        <div class="card info-box">
+                            <h4>💡 Dica da Fase</h4>
+                            <p id="phaseTip">Foque em aumentar o nível de água. Use evaporação para criar nuvens, depois condense para criar chuva.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ABA: REGRAS -->
+            <div id="rules" class="tab-content">
+                <div class="rules-container">
+                    <div class="card">
+                        <div class="card-header">📖 Regras e Explicação do Jogo</div>
+                        
+                        <div class="mini-tabs">
+                            <button class="mini-tab active" data-rules-tab="overview">Visão Geral</button>
+                            <button class="mini-tab" data-rules-tab="mechanics">Mecânicas</button>
+                            <button class="mini-tab" data-rules-tab="chemistry">Química</button>
+                            <button class="mini-tab" data-rules-tab="tips">Dicas</button>
+                        </div>
+
+                        <div id="overview" class="mini-tab-content active">
+                            <h3>🎮 O que é Elementally?</h3>
+                            <p>Elementally: Os Guardiões dos Ciclos é um jogo educativo que ensina sobre os ciclos naturais da Terra através de mecânicas interativas. Você assume o papel de um Guardião Elemental cuja missão é restaurar o equilíbrio dos ciclos do oxigênio e da água em um mundo fantástico chamado Elementia.</p>
+                            
+                            <h3>🎯 Objetivo Principal</h3>
+                            <p>Viaje por 4 biomas diferentes (Deserto, Floresta, Pântano e Coração de Elementia), complete desafios em cada um, e restaure o equilíbrio ambiental. Cada bioma tem objetivos específicos que você deve alcançar para avançar.</p>
+                            
+                            <h3>📊 Métricas Importantes</h3>
+                            <ul>
+                                <li><strong>Equilíbrio Ambiental (0-100%):</strong> Métrica composta que reflete a saúde geral do ecossistema.</li>
+                                <li><strong>Nível do Jogador:</strong> Aumenta a cada 100 pontos conquistados. Desbloqueia novas habilidades.</li>
+                                <li><strong>Pontos (Score):</strong> Ganhos ao completar ações e desafios.</li>
+                            </ul>
+                        </div>
+
+                        <div id="mechanics" class="mini-tab-content">
+                            <h3>💧 Ciclo da Água</h3>
+                            <ul>
+                                <li><strong>❄️ Transformação para Sólido:</strong> Congela a água líquida em gelo.</li>
+                                <li><strong>💧 Transformação para Líquido:</strong> Transforma gelo em água ou vapor em água.</li>
+                                <li><strong>☁️ Transformação para Gasoso:</strong> Transforma água líquida em vapor.</li>
+                                <li><strong>🔬 Purificação de Água:</strong> Remove poluentes usando filtração e reações químicas.</li>
+                            </ul>
+                            
+                            <h3>🌿 Ciclo do Oxigênio</h3>
+                            <ul>
+                                <li><strong>🌱 Plantar Árvore:</strong> Planta uma árvore que produzirá oxigênio via fotossíntese.</li>
+                                <li><strong>🦋 Adicionar/Remover Criaturas:</strong> Criaturas consomem oxigênio e produzem CO₂.</li>
+                                <li><strong>🌿 Fotossíntese:</strong> Acelera a produção de oxigênio pelas plantas.</li>
+                                <li><strong>💨 Respiração Celular:</strong> Simula a respiração das criaturas.</li>
+                                <li><strong>🍂 Decomposição:</strong> Decompõe plantas mortas, liberando CO₂.</li>
+                            </ul>
+                        </div>
+
+                        <div id="chemistry" class="mini-tab-content">
+                            <h3>🔬 Conceitos de Química</h3>
+                            
+                            <h4>Mudanças de Estado Físico</h4>
+                            <p>A água pode existir em três estados: sólido (gelo), líquido (água) e gasoso (vapor). Cada transformação requer ou libera energia.</p>
+                            
+                            <h4>Fotossíntese</h4>
+                            <p><strong>6CO₂ + 6H₂O + Luz → C₆H₁₂O₆ + 6O₂</strong></p>
+                            <p>Plantas usam luz solar, água e dióxido de carbono para criar glicose (energia) e liberar oxigênio.</p>
+                            
+                            <h4>Respiração Celular</h4>
+                            <p><strong>C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + Energia</strong></p>
+                            <p>Organismos vivos usam oxigênio para quebrar glicose e liberar energia.</p>
+                            
+                            <h4>Decomposição</h4>
+                            <p>Decompositores quebram matéria orgânica morta, liberando carbono de volta à atmosfera como CO₂.</p>
+                            
+                            <h4>Reações Ácido-Base</h4>
+                            <p>Ácidos e bases podem ser neutralizados através de reações químicas. Um pH neutro (7) é ideal para a maioria dos ecossistemas.</p>
+                        </div>
+
+                        <div id="tips" class="mini-tab-content">
+                            <h3>💡 Dicas e Estratégias</h3>
+                            
+                            <h4>🏜️ Fase 1: Deserto</h4>
+                            <p>Foque em aumentar o nível de água. Use evaporação para criar nuvens, depois condense para criar chuva. Purifique a água poluída para ganhar mais pontos.</p>
+                            
+                            <h4>🌲 Fase 2: Floresta</h4>
+                            <p>Plante muitas árvores para aumentar a produção de oxigênio. Use fotossíntese para acelerar o processo. Mantenha o número de criaturas baixo.</p>
+                            
+                            <h4>🌿 Fase 3: Pântano</h4>
+                            <p>Use neutralização para reduzir a acidez. Mantenha um equilíbrio entre plantas e criaturas. Controle a decomposição.</p>
+                            
+                            <h4>💎 Fase 4: Coração de Elementia</h4>
+                            <p>Use todas as habilidades aprendidas para alcançar 80% de equilíbrio ambiental. Balanceie todos os ciclos simultaneamente.</p>
+                            
+                            <h3>⚡ Estratégias Gerais</h3>
+                            <ul>
+                                <li>Monitore o equilíbrio ambiental constantemente</li>
+                                <li>Não deixe o oxigênio cair muito baixo ou subir muito alto</li>
+                                <li>Mantenha água suficiente para as plantas</li>
+                                <li>Use as habilidades desbloqueadas para otimizar os ciclos</li>
+                                <li>Ganhe pontos para desbloquear novas habilidades</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
